@@ -10,9 +10,18 @@ import ProtectedRoute from './components/ProtectedRoute';
 
 export default function App() {
   const { user, logout } = useAuth();
+
   return (
     <div className='container'>
-      <nav className='nav'>{user && <><Link to='/dashboard'>Dashboard</Link><Link to='/projects'>Projects</Link><button onClick={logout}>Logout</button></>}</nav>
+      {user && (
+        <nav className='nav'>
+          <strong>✨ TaskFlow</strong>
+          <Link to='/dashboard'>Dashboard</Link>
+          <Link to='/projects'>Projects</Link>
+          <button onClick={logout} className='btn-secondary'>Logout</button>
+        </nav>
+      )}
+
       <Routes>
         <Route path='/' element={<Navigate to={user ? '/dashboard' : '/login'} />} />
         <Route path='/login' element={<LoginPage />} />
